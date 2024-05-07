@@ -17,7 +17,13 @@ function App() {
         <div>
           <h1>Contacts</h1>
           {contacts.map((contact) => {
-            return <ContactCard key={contact.name} contact={contact} />;
+            return (
+              <ContactCard
+                key={contact.name}
+                contact={contact}
+                setContacts={setContacts}
+              />
+            );
           })}
           <RegistrationForm setContacts={setContacts} />
         </div>

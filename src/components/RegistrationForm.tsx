@@ -15,9 +15,17 @@ export const RegistrationForm = ({ setContacts }: Props): JSX.Element => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setContacts((prev) =>
-      prev.push({ name: nameRef.current.value, email: emailRef.current.value })
-    );
+
+    if (nameRef.current !== null && emailRef.current !== null) {
+      setContacts((prev) => {
+        const prevCopy = [...prev];
+        prevCopy.push({
+          name: nameRef.current.value,
+          email: emailRef.current.value,
+        });
+        return prevCopy;
+      });
+    }
   };
 
   return (
@@ -28,6 +36,7 @@ export const RegistrationForm = ({ setContacts }: Props): JSX.Element => {
         id="name"
         placeholder="name"
         ref={nameRef}
+        required
       />
       <input
         type="email"
@@ -35,6 +44,7 @@ export const RegistrationForm = ({ setContacts }: Props): JSX.Element => {
         id="email"
         placeholder="email"
         ref={emailRef}
+        required
       />
       <button>ADD</button>
     </form>
