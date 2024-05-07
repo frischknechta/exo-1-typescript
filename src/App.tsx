@@ -2,29 +2,30 @@ import { useState } from "react";
 import "./App.css";
 import { RegistrationForm } from "./components/RegistrationForm";
 import { ContactCard } from "./components/ContactCard";
-
-type Contact = {
-  name: string;
-  email: string;
-};
+import { Contact } from "./types/types";
 
 function App() {
   const [contacts, setContacts] = useState<Contact[]>([]);
 
   return (
     <>
-      <main>
-        <div>
-          <h1>Contacts</h1>
-          {contacts.map((contact) => {
-            return (
-              <ContactCard
-                key={contact.name}
-                contact={contact}
-                setContacts={setContacts}
-              />
-            );
-          })}
+      <main className="flex h-screen w-screen items-center justify-center bg-gray-800">
+        <div className="flex min-h-40 flex-col rounded-2xl bg-white px-3">
+          <h1 className="my-5 text-center text-3xl font-bold text-indigo-600">
+            Contacts
+          </h1>
+          <div className="flex flex-col gap-2">
+            {contacts.map((contact, index) => {
+              return (
+                <ContactCard
+                  key={index}
+                  index={index}
+                  contact={contact}
+                  setContacts={setContacts}
+                />
+              );
+            })}
+          </div>
           <RegistrationForm setContacts={setContacts} />
         </div>
       </main>
